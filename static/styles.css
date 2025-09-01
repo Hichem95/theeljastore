@@ -1,0 +1,1086 @@
+/* Modern and attractive styles for the delivery service web application */
+body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Light neutral background similar to the Astro template */
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+header {
+    /* Stylish gradient background for the header */
+    background: linear-gradient(90deg, #00b4d8, #008a94);
+    color: #ffffff;
+    padding: 15px 20px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for logo, navigation and cart indicator */
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Logo section (image + text) */
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.site-name {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #121212;
+    /* Provide consistent spacing between the logo and the company name in all languages.  Using
+       margin-inline-start allows the margin to adapt to right‑to‑left scripts (Arabic) without
+       manual adjustments. */
+    margin-inline-start: 6px;
+}
+
+nav a {
+    /* Space the links evenly and remove default underline */
+    margin: 0 12px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    padding: 6px 4px;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    /* Add a subtle underline effect that animates from left to right on hover */
+    --underline-height: 2px;
+    --underline-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Pseudo‑element to draw animated underline */
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: var(--underline-height);
+    width: 0;
+    background-color: var(--underline-color);
+    transition: width 0.3s ease;
+}
+
+/* On hover, extend the underline fully */
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    /* Lighten the link colour slightly on hover */
+    color: #e0f7fa;
+    transform: translateY(-1px);
+}
+
+/* Cart indicator styles */
+.cart-indicator {
+    font-size: 1.1em;
+}
+
+.cart-link {
+    color: #444444;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.cart-count {
+    background-color: #008a94;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    margin-left: 4px;
+}
+
+/* Language selection links */
+.language-select {
+    margin-top: 6px;
+    font-size: 0.85em;
+    color: #666666;
+    text-align: right;
+}
+
+.language-select a {
+    margin: 0 4px;
+    text-decoration: none;
+    color: #444444;
+}
+
+.language-select a:hover {
+    text-decoration: underline;
+}
+
+/* Add spacing after the language icon in the language selection bar */
+.language-select span {
+    margin-right: 6px;
+}
+
+/* Added to cart message */
+.added-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    border: 1px solid #c3e6cb;
+    transition: opacity 0.5s ease;
+}
+
+/* header-image class removed since decorative header replaced by logo */
+
+main {
+    /* Reduce the top padding so the hero section sits flush with the card container */
+    padding: 10px 30px 30px 30px;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 70vh;
+}
+
+/* Layout combining products grid and cart sidebar */
+.products-and-cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Sidebar summary for cart displayed on the right of product grid */
+.cart-sidebar {
+    flex: 0 0 280px;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Cart overlay that slides in from the right when an item is added */
+.cart-overlay {
+    position: fixed;
+    /* Leave space for the header (approx 80px) so the overlay doesn't cover navigation */
+    top: 80px;
+    right: 0;
+    /* Responsive width: take a fraction of the viewport but remain within sensible bounds */
+    width: 30%;
+    max-width: 320px;
+    min-width: 260px;
+    /* Height minus header space */
+    height: calc(100vh - 80px);
+    background-color: #ffffff;
+    border-left: 1px solid #eaeaea;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.cart-overlay.open {
+    transform: translateX(0);
+}
+
+.cart-sidebar h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.3em;
+    color: #008a94;
+}
+
+.cart-sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.cart-sidebar li {
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.cart-sidebar .total {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #222;
+}
+
+.cart-sidebar .checkout-button {
+    display: block;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #008a94;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.cart-sidebar .checkout-button:hover {
+    background-color: #006571;
+}
+
+/* Styles for headings and lists inside the cart overlay (same as sidebar) */
+.cart-overlay h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.3em;
+    color: #008a94;
+}
+
+.cart-overlay ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.cart-overlay li {
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.cart-overlay .total {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #222;
+}
+
+.cart-overlay .checkout-button {
+    display: block;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #008a94;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.cart-overlay .checkout-button:hover {
+    background-color: #006571;
+}
+
+/* Close button for the slide‑out cart */
+.cart-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.4em;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.cart-close:hover {
+    color: #444;
+    transform: scale(1.1);
+}
+
+/* Search form in header */
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.search-form input[type="text"] {
+    padding: 6px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.search-form input[type="text"]:focus {
+    outline: none;
+    border-color: #008a94;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: transparent;
+    border: none;
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #008a94;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+body.dark-theme .theme-toggle {
+    color: #1e90ff;
+}
+
+/* Cart action buttons inside overlay */
+.cart-action {
+    margin-left: 6px;
+    color: #008a94;
+    text-decoration: none;
+    font-weight: bold;
+    /* Increase size of the emoji icons for a more dynamic look */
+    font-size: 1.4em;
+    cursor: pointer;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.cart-action:hover {
+    color: #005860;
+    transform: scale(1.25);
+}
+
+/* Colour differentiation for cart actions for intuitive usage */
+.cart-action-increase {
+    color: #28a745;
+}
+.cart-action-increase:hover {
+    color: #1c7c31;
+}
+.cart-action-decrease {
+    color: #ffc107;
+}
+.cart-action-decrease:hover {
+    color: #d39e00;
+}
+.cart-action-remove {
+    color: #dc3545;
+}
+.cart-action-remove:hover {
+    color: #a71d2a;
+}
+
+/* Payment API placeholder styling in checkout page */
+.payment-api {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px dashed #cccccc;
+    border-radius: 4px;
+    background-color: #f7f9fa;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Dark theme adjustments for payment placeholder */
+body.dark-theme .payment-api {
+    border-color: #555;
+    background-color: #2f2f2f;
+    color: #ccc;
+}
+
+/* Responsive adjustments for the slide‑out cart on smaller screens */
+@media (max-width: 800px) {
+    .cart-overlay {
+        width: 70%;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 500px) {
+    .cart-overlay {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Dark theme overrides */
+body.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+body.dark-theme header {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-bottom-color: #333;
+}
+body.dark-theme .site-name,
+body.dark-theme nav a,
+body.dark-theme .cart-link {
+    color: #e0e0e0;
+}
+body.dark-theme nav a:hover {
+    /* In dark mode, highlight links on hover with an accent colour */
+    color: #00b4d8;
+}
+
+/* Dark theme underline colour for nav links */
+body.dark-theme nav a::after {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+body.dark-theme main {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+body.dark-theme .product-item,
+body.dark-theme .featured-item,
+body.dark-theme .cart-sidebar,
+body.dark-theme .cart-overlay {
+    background-color: #2a2a2a;
+    border-color: #444;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+body.dark-theme .button {
+    background-color: #1e90ff;
+    color: #ffffff;
+}
+body.dark-theme .button:hover {
+    background-color: #0d6efd;
+}
+body.dark-theme .secondary-button {
+    color: #1e90ff;
+    border-color: #1e90ff;
+}
+body.dark-theme .secondary-button:hover {
+    background-color: #1e90ff;
+    color: #ffffff;
+}
+body.dark-theme .search-form input[type="text"] {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border-color: #555;
+}
+body.dark-theme .search-form input[type="text"]:focus {
+    border-color: #1e90ff;
+}
+body.dark-theme .cart-close {
+    color: #bbb;
+}
+body.dark-theme .cart-close:hover {
+    color: #eee;
+}
+body.dark-theme .cart-action-increase {
+    color: #50c878;
+}
+body.dark-theme .cart-action-decrease {
+    color: #e4c85f;
+}
+body.dark-theme .cart-action-remove {
+    color: #e06c75;
+}
+body.dark-theme .cart-action:hover {
+    color: inherit;
+}
+
+/*--------------------------------------------------------------------*/
+/* Footer styles inspired by professional e‑commerce templates         */
+/* The footer uses a dark background with light text, includes a      */
+/* newsletter sign‑up, multiple columns for categories/support/info    */
+/* and a bottom row with social and payment icons.                    */
+.site-footer {
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+.site-footer .newsletter {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.site-footer .newsletter h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.site-footer .newsletter-form {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.site-footer .newsletter-form input[type="email"] {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.9em;
+}
+.site-footer .newsletter-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #00b4d8;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.site-footer .newsletter-form button:hover {
+    background-color: #008a94;
+}
+
+/* RTL adjustments: when the document direction is right-to-left, reverse the
+   order of the newsletter form fields and swap border radius to ensure the
+   button appears on the left side. */
+html[dir="rtl"] .site-footer .newsletter-form {
+    flex-direction: row-reverse;
+}
+html[dir="rtl"] .site-footer .newsletter-form input[type="email"] {
+    border-radius: 0 4px 4px 0;
+}
+html[dir="rtl"] .site-footer .newsletter-form button {
+    border-radius: 4px 0 0 4px;
+}
+
+.site-footer .footer-columns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.site-footer .footer-col {
+    flex: 1 1 30%;
+    margin-bottom: 20px;
+}
+.site-footer .footer-col h4 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.site-footer .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.site-footer .footer-col ul li {
+    margin-bottom: 8px;
+}
+.site-footer .footer-col a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s ease;
+}
+.site-footer .footer-col a:hover {
+    color: #ffffff;
+}
+.site-footer .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 1px solid #333;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+.site-footer .social-links a {
+    margin-right: 15px;
+    font-size: 1.4em;
+    color: #cccccc;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.site-footer .social-links a:hover {
+    transform: scale(1.2);
+    color: #ffffff;
+}
+.site-footer .payments span {
+    margin-right: 10px;
+    font-size: 1.4em;
+    color: #cccccc;
+}
+.site-footer .copy {
+    font-size: 0.9em;
+}
+
+/* Use SVG logos for social and payment icons */
+.site-footer .social-links img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    filter: invert(85%) brightness(1.1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+.site-footer .social-links img:hover {
+    transform: scale(1.2);
+    filter: invert(100%) brightness(1.4);
+}
+
+/* Brand colours for social icons using CSS filters. These rules override the
+   default grayscale filter and tint each icon with approximate brand colours.
+   The filter values were computed to achieve colours close to the official
+   brand palettes. */
+.site-footer .social-links img[alt="Facebook"] {
+    filter: invert(26%) sepia(88%) saturate(6381%) hue-rotate(203deg) brightness(93%) contrast(101%);
+}
+.site-footer .social-links img[alt="Instagram"] {
+    filter: invert(35%) sepia(56%) saturate(4043%) hue-rotate(321deg) brightness(91%) contrast(101%);
+}
+.site-footer .social-links img[alt="X"] {
+    filter: invert(42%) sepia(90%) saturate(743%) hue-rotate(169deg) brightness(91%) contrast(91%);
+}
+.site-footer .social-links img[alt="WhatsApp"] {
+    filter: invert(54%) sepia(78%) saturate(1281%) hue-rotate(94deg) brightness(92%) contrast(96%);
+}
+.site-footer .payments img {
+    /* Display payment logos at their original colours without applying any filter. */
+    width: 40px;
+    height: auto;
+    margin-right: 12px;
+    filter: none;
+    transition: transform 0.2s ease;
+}
+.site-footer .payments img:hover {
+    /* Enlarge slightly on hover to give a tactile feedback */
+    transform: scale(1.1);
+    filter: none;
+}
+
+/* When the footer appears in dark theme, the colours are already dark.  */
+
+/* Shift content when cart is open */
+body.cart-open main {
+    margin-right: var(--cart-width, 0px);
+    transition: margin-right 0.3s ease;
+}
+@media (max-width: 800px) {
+    body.cart-open main {
+        margin-right: 70%;
+    }
+}
+@media (max-width: 500px) {
+    body.cart-open main {
+        margin-right: 100%;
+    }
+}
+
+/* Product detail page */
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.product-detail-image-wrapper {
+    flex: 1 1 300px;
+}
+
+.product-detail-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.product-detail-info {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.product-detail-info .description {
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.product-detail-info .price {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Featured products section on home page */
+.featured-section {
+    margin-top: 40px;
+    /* Use a decorative background image for the featured section */
+    background-image: url('/static/section_bg1.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    padding: 40px 20px;
+}
+
+.featured-section h2 {
+    margin-bottom: 20px;
+    color: #008a94;
+    font-size: 1.6em;
+}
+
+.featured-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Featured items reuse .product-item styles but allow subtle adjustments */
+.featured-item {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.featured-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Fade-in animation for hero section */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide up animation for hero text elements */
+.hero-content h1,
+.hero-content p,
+.hero-content a.button,
+.hero-content a.secondary-button {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.6s ease forwards;
+}
+/* Stagger animations on heading, paragraph and button */
+.hero-content h1 { animation-delay: 0.1s; }
+.hero-content p { animation-delay: 0.3s; }
+.hero-content a.button { animation-delay: 0.5s; }
+.hero-content a.secondary-button { animation-delay: 0.6s; }
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bounce animation for the cart icon when an item is added */
+.cart-link.cart-bounce {
+    animation: cartBounce 0.6s ease;
+}
+
+@keyframes cartBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* Secondary button (ghost style) */
+.secondary-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: transparent;
+    color: #008a94;
+    border: 2px solid #008a94;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.secondary-button:hover {
+    background-color: #008a94;
+    color: #ffffff;
+}
+
+h1 {
+    color: #222;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    /* Subtle background pattern for product listing */
+    background-image: url('/static/section_bg2.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.product-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-item:hover {
+    /* Maintain a soft shadow on hover without interfering with JS tilt animations */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.product-item h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #008a94;
+}
+
+/* Links inside product items */
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+.product-link h2 {
+    color: #008a94;
+    margin-top: 12px;
+}
+
+/* Product images */
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.description {
+    color: #555;
+    margin: 8px 0 12px 0;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.price {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #444;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008a94;
+    color: #ffffff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.button:hover {
+    background-color: #006571;
+    transform: translateY(-2px);
+}
+
+/* Reveal animation for product cards on scroll */
+.product-item {
+    /* Start hidden and slightly translated down */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    /* Set perspective to enable 3D tilt animation */
+    perspective: 600px;
+    transform-style: preserve-3d;
+}
+.product-item.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    border: none;
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.cart-table th {
+    background-color: #0073e6;
+    color: white;
+    font-weight: 600;
+}
+
+.cart-table tr:nth-child(even) {
+    background-color: #f7faff;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+form button {
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #fafafa;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.85em;
+    color: #666;
+}
+
+/* Hero section for landing page */
+.hero {
+    position: relative;
+    background-image: url('/static/hero.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    /* Hide any overflow to prevent white strips showing through corners */
+    overflow: hidden;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Darken the hero background further to improve text contrast */
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    /* Increase hero heading size for better readability on busy backgrounds */
+    font-size: 2.6em;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+    /* Increase paragraph size and adjust colour for improved readability */
+    font-size: 1.2em;
+    margin-bottom: 24px;
+    color: #f5f5f5;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for hero tagline when no heading is displayed */
+.hero-tagline {
+    font-size: 1.4em;
+    color: #f5f5f5;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 24px;
+}
+
+/* ==============================
+   Additional enhancements
+   ==============================
+*/
+
+/* Back to top button styling */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #00b4d8;
+    color: #fff;
+    font-size: 1.4em;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+#back-to-top:hover {
+    background-color: #008a94;
+    transform: translateY(-2px);
+}
+/* Place the back-to-top button on the left for RTL languages */
+html[dir="rtl"] #back-to-top {
+    right: auto;
+    left: 20px;
+}
+
+/* Highlight active navigation link */
+header nav a.active {
+    /* Highlight the active link by giving it a subtle translucent background
+       and rounded corners instead of a plain underline. This creates a more
+       polished look and improves legibility on the colourful header. */
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}

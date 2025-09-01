@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{site_title}}</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <!-- Use company logo as favicon so that the logo appears in browser tabs -->
+    <link rel="icon" type="image/png" href="/static/logo.png" />
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="logo-section">
+                <img src="/static/logo.png" alt="{{site_title}} logo" class="logo" />
+                <span class="site-name">{{site_title}}</span>
+            </div>
+            <nav>
+                <a href="/?lang={{lang}}">{{nav_home}}</a>
+                <a href="/products?lang={{lang}}">{{nav_products}}</a>
+                <a href="/cart?lang={{lang}}">{{nav_cart}}</a>
+            </nav>
+            <!-- Dynamic search form next to cart icon -->
+            <form class="search-form" action="/products" method="GET">
+                <input type="hidden" name="lang" value="{{lang}}" />
+                <input type="text" name="search" placeholder="{{search_placeholder}}" />
+            </form>
+            <!-- Cart indicator displayed on the right side -->
+            <div class="cart-indicator">
+                <a href="/cart?lang={{lang}}" class="cart-link">🛒 <span class="cart-count">{{cart_count}}</span></a>
+            </div>
+        </div>
+        <div class="language-select">
+            <span>{{nav_language}}</span>
+            <a href="?lang=fr">FR</a> | <a href="?lang=en">EN</a> | <a href="?lang=ar">AR</a>
+            <!-- Theme toggle button: displays a moon/sun icon -->
+            | <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌓</button>
+        </div>
+    </header>
+    <main>
+        {{content}}
+    </main>
+    <!-- New stylish footer inspired by modern e‑commerce templates -->
+    <footer class="site-footer">
+        <div class="newsletter">
+            <h3>{{newsletter_signup}}</h3>
+            <form class="newsletter-form" action="#" method="POST">
+                <input type="email" placeholder="{{email_placeholder}}" />
+                <button type="submit" aria-label="Subscribe">{{newsletter_submit_icon}}</button>
+            </form>
+        </div>
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>{{footer_category_title}}</h4>
+                <ul>
+                    <li><a href="#">{{category_1}}</a></li>
+                    <li><a href="#">{{category_2}}</a></li>
+                    <li><a href="#">{{category_3}}</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>{{footer_support_title}}</h4>
+                <ul>
+                    <li><a href="/faq?lang={{lang}}">{{support_faq}}</a></li>
+                    <li><a href="/contact?lang={{lang}}">{{support_contact}}</a></li>
+                    <li><a href="/delivery?lang={{lang}}">{{support_delivery}}</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>{{footer_info_title}}</h4>
+                <ul>
+                    <li><a href="/privacy?lang={{lang}}">{{info_privacy}}</a></li>
+                    <li><a href="/terms?lang={{lang}}">{{info_terms}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="https://www.facebook.com/theeljastore" target="_blank" aria-label="Facebook"><img src="/static/icons/facebook.svg" alt="Facebook" /></a>
+                <a href="https://www.instagram.com/theeljastore/" target="_blank" aria-label="Instagram"><img src="/static/icons/instagram.svg" alt="Instagram" /></a>
+                <!-- Replace '#' with your X/Twitter profile link if available -->
+                <a href="#" target="_blank" aria-label="X"><img src="/static/icons/twitter-x.svg" alt="X" /></a>
+                <a href="https://wa.me/21655417232" target="_blank" aria-label="WhatsApp"><img src="/static/icons/whatsapp.svg" alt="WhatsApp" /></a>
+            </div>
+            <div class="payments">
+                <!-- Display official payment logos using static SVG files. These files are stored
+                     in the static/icons directory and served with the correct MIME type. -->
+                <img src="/static/icons/amex.svg" alt="American Express" class="payment-icon" />
+                <img src="/static/icons/mastercard.svg" alt="MasterCard" class="payment-icon" />
+                <img src="/static/icons/visa.svg" alt="Visa" class="payment-icon" />
+            </div>
+            <div class="copy">© 2025 Theelja Store</div>
+        </div>
+    </footer>
+    <!-- Back to top button -->
+    <button id="back-to-top" title="Back to top">↑</button>
+    <!-- Include custom JavaScript for animations -->
+    <!-- Load scripts with defer to avoid blocking rendering -->
+    <script src="/static/scripts.js" defer></script>
+</body>
+</html>

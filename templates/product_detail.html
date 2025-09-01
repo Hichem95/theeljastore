@@ -1,0 +1,12 @@
+<h1>{{product_name}}</h1>
+<div class="product-detail-container">
+    <div class="product-detail-image-wrapper">
+        <img src="/static/images/{{image_filename}}" alt="{{product_name}}" class="product-detail-image" loading="lazy" />
+    </div>
+    <div class="product-detail-info">
+        <p class="description">{{product_description}}</p>
+        <p class="price">{{price_label}}: {{product_price}} TND</p>
+        <a class="button" href="/add_to_cart?product_id={{product_id}}&lang={{lang}}">{{add_to_cart}}</a>
+        <a class="secondary-button" href="/products?lang={{lang}}">{{back_to_products}}</a>
+    </div>
+</div>
